@@ -21,8 +21,6 @@ const Banner = () => {
                         <h1 className="text-xl font-bold mb-4">Welcome to <span className=' text-[#b675f6ec]'>BYTESKILL</span></h1>
                         <h2 className="text-5xl font-bold ">The Best Online Courses You'll Find</h2>
                         <p className="py-6 max-w-lg">Etiam interdum arcu metus, eget ultricies eros euismod ut. Aenean fermentum vestibulum risus, et volutpat elit. Suspendisse potenti amatug.</p>
-                        {/* <button className="btn btn-primary">Get Started</button> 
-                        */}
                         <div>
                             <Button
                                 label={'Get Started'}
