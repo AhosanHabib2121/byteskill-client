@@ -1,12 +1,67 @@
-import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
+import { Link, useNavigate } from "react-router-dom";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import { useState } from "react";
 import Container from "../../components/share/Container";
 import signInUp from '../../assets/sign-in-up.png'
+import GoogleLogin from "../../components/share/googleLogin/GoogleLogin";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
+    const { signIn } = useAuth();
     const [passShowHide, setPassShowHide] = useState(false);
+    const navigate = useNavigate();
+    const [error, setError] = useState('');
+    const axiosPublic = useAxiosPublic();
+
+    const handleSignIn = e => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        // error message clean
+        setError("");
+
+        if (password.length < 6) {
+            setError("Password must be 6 characters!");
+            return;
+        }
+        signIn(email, password)
+            .then(data => {
+                const lastLoginAt = data.user?.metadata?.lastSignInTime;
+                const userInfo = {
+                    email,
+                    password,
+                    lastLoginAt,
+                };
+                axiosPublic.patch('/api/user', userInfo)
+                    .then(res => {
+                        if (res.data.modifiedCount == 1) {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener("mouseenter", Swal.stopTimer);
+                                    toast.addEventListener("mouseleave", Swal.resumeTimer);
+                                },
+                            });
+                            Toast.fire({
+                                icon: "success",
+                                title: "SignIn successfully",
+                            });
+                            form.reset();
+                            navigate("/");
+                        }
+                    })
+            })
+            .catch(error => setError(error.message));
+    }
+
     return (
         <div className=" mt-20">
             <Container>
@@ -22,10 +77,9 @@ const SignIn = () => {
                                 Sign In
                             </h1>
                             <div className=" px-8 py-5">
-                                {/* {error ? <p className=" text-red-500">{error}</p> : ""} */}
+                                {error ? <p className=" text-red-500">{error}</p> : ""}
                             </div>
-                            {/* onSubmit={handleLogin} */}
-                            <form className="card-body">
+                            <form onSubmit={handleSignIn} className="card-body">
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text text-[#fff]">Email</span>
@@ -93,13 +147,7 @@ const SignIn = () => {
                             </div>
                             {/* google button */}
                             <div className="text-center mt-4 mb-4">
-                                <button
-                                    // onClick={handleGoogle}
-                                    className="btn bg-inherit hover:bg-[#6623a4]  outline-1  normal-case rounded-full w-64 border-gray-400 text-white "
-                                >
-                                    <FcGoogle className=" text-3xl top-2 left-4 md:left-32 " />
-                                    Continue with Google
-                                </button>
+                                <GoogleLogin/>
                             </div>
                         </div>
                     </div>

@@ -1,12 +1,86 @@
-import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
+/* eslint-disable react-hooks/rules-of-hooks */
+import { Link, useNavigate } from "react-router-dom";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import { useState } from "react";
 import Container from "../../components/share/Container";
 import signInUp from '../../assets/sign-in-up.png'
+import useImageUpload from "../../hooks/useImageUpload";
+import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import GoogleLogin from "../../components/share/googleLogin/GoogleLogin";
 
 const SignUp = () => {
+    const { createUser, updateUserProfile } = useAuth();
     const [passShowHide, setPassShowHide] = useState(false);
+    const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
+    const [error, setError] = useState('')
+
+
+    const handleSignUp = e => {
+        e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        const image = form.image.files[0];
+        // error message clean
+        setError("");
+
+        if (password.length < 6) {
+            setError("Password must be 6 characters!");
+            return;
+        }
+
+        // image upload in imgbb host server start
+        const imageData = useImageUpload(image);
+        // firebased create user
+        createUser(email, password)
+            .then(data => {
+                updateUserProfile(name, imageData?.data?.display_url)
+                    .then(() => {
+                        const userData = {
+                            name: data?.user?.displayName,
+                            email: data?.user?.email
+                        }
+                        axiosSecure.post('/api/user', userData)
+                            .then(res => {
+                                if (res?.data?.insertedId) {
+                                    const Toast = Swal.mixin({
+                                        toast: true,
+                                        position: "top-end",
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                        timerProgressBar: true,
+                                        didOpen: (toast) => {
+                                            toast.addEventListener(
+                                                "mouseenter",
+                                                Swal.stopTimer
+                                            );
+                                            toast.addEventListener(
+                                                "mouseleave",
+                                                Swal.resumeTimer
+                                            );
+                                        },
+                                    });
+                                    Toast.fire({
+                                        icon: "success",
+                                        title: "Account create successfully",
+                                    });
+                                    form.reset();
+                                    navigate('/');
+                                }
+                            })
+
+                    })
+            })
+            .catch(err => setError(err));
+
+
+
+    }
+
     return (
         <div className=" mt-20">
             <Container>
@@ -22,10 +96,9 @@ const SignUp = () => {
                                 Sign Up
                             </h1>
                             <div className=" px-8 py-5">
-                                {/* {error ? <p className=" text-red-500">{error}</p> : ""} */}
+                                {error ? <p className=" text-red-500">{error}</p> : ""}
                             </div>
-                            {/* onSubmit={handleLogin} */}
-                            <form className="card-body">
+                            <form onSubmit={handleSignUp} className="card-body">
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text text-white text-lg font-poppins font-medium ">
@@ -111,13 +184,7 @@ const SignUp = () => {
                             </div>
                             {/* google button */}
                             <div className="text-center mt-4 mb-4">
-                                <button
-                                    // onClick={handleGoogle}
-                                    className="btn bg-inherit hover:bg-[#6623a4]  outline-1  normal-case rounded-full w-64 border-gray-400 text-white "
-                                >
-                                    <FcGoogle className=" text-3xl top-2 left-4 md:left-32 " />
-                                    Continue with Google
-                                </button>
+                                <GoogleLogin/>
                             </div>
                         </div>
                     </div>
@@ -126,5 +193,6 @@ const SignUp = () => {
         </div>
     );
 };
+
 
 export default SignUp;
