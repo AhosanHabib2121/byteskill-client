@@ -18,7 +18,7 @@ const SignUp = () => {
     const [error, setError] = useState('')
 
 
-    const handleSignUp = e => {
+    const handleSignUp = async e => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -34,7 +34,8 @@ const SignUp = () => {
         }
 
         // image upload in imgbb host server start
-        const imageData = useImageUpload(image);
+        const imageData = await useImageUpload(image);
+        // console.log(imageData)
         // firebased create user
         createUser(email, password)
             .then(data => {
@@ -46,6 +47,7 @@ const SignUp = () => {
                         }
                         axiosSecure.post('/api/user', userData)
                             .then(res => {
+                                console.log(res.data)
                                 if (res?.data?.insertedId) {
                                     const Toast = Swal.mixin({
                                         toast: true,

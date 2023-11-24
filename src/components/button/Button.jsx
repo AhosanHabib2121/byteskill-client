@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 
-const Button = ({label, icon, round, outline}) => {
+const Button = ({ label, onClick, icon, round, outline}) => {
     return (
         <button
+            onClick={onClick}
             className={`
           relative
           transition
