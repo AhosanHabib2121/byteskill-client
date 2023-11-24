@@ -1,0 +1,7 @@
+.active{
+    color:#9050ccbd;
+    background-color: none;
+}
+li:hover{
+    color: #9050ccfc;
+}

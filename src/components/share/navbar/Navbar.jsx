@@ -1,10 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Container from "../Container";
 import logo from '../../../assets/logo_ByteSkill.png'
+import './Navbar.css'
+import Button from "../../button/Button";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 const Navbar = () => {
     const navLink = <>
-        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink  to='/'>Home</NavLink></li>
         <li><NavLink to='/allClasses'>All Classes</NavLink></li>
     </>
     return (
@@ -29,13 +32,20 @@ const Navbar = () => {
                     
                     <div className="navbar-end gap-16">
                         <div className="hidden lg:flex">
-                            <ul className="menu menu-horizontal px-1">
+                            <ul className="gap-4 text-lg menu-horizontal px-1">
                                 {navLink}
                             </ul>
                         </div>
                         {/* sign in and if user logged profile photo set here */}
                         <div>
-                            <a className="btn">Sign in</a>
+                            <Link>
+                                <Button
+                                    label={'Sign in'}
+                                    round={'rounded-full'}
+                                    outline={true}
+                                    icon={<FaArrowRightLong />}
+                                />
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -1,35 +1,34 @@
 import PropTypes from 'prop-types';
 
-const Button = ({label, icon:Icon}) => {
+const Button = ({label, icon, round, outline}) => {
     return (
         <button
             className={`
           relative
-          rounded-lg
           transition
           px-4
           py-3
-          bg-[#9333EA]
           hover:bg-[#7b25cb]
+          ${round ? `${round}` :'rounded-lg'}
+          ${outline ? 'bg-[#1C1E2A]' : 'bg-[#9333EA]'}
+          ${outline ? 'outline-[#9333EA] outline' : ''}
+          
         `}
         >
-            {Icon && (
-                <Icon
-                    size={24}
-                    className='
-              absolute
-              left-4
-              top-3
-            '
-                />
-            )}
-            {label}
+            <div className='flex items-center justify-center gap-2'>
+                {label}
+                {icon}
+            </div>
+            
+            
         </button>
     );
 };
 Button.propTypes = {
     label: PropTypes.node,
     icon: PropTypes.node,
+    round: PropTypes.node,
+    outline: PropTypes.node,
 }
 
 export default Button;
