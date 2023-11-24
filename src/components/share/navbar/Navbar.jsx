@@ -38,7 +38,7 @@ const Navbar = () => {
                         </div>
                         {/* sign in and if user logged profile photo set here */}
                         <div>
-                            <Link>
+                            <Link to='/signIn'>
                                 <Button
                                     label={'Sign in'}
                                     round={'rounded-full'}
