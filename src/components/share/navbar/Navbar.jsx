@@ -11,7 +11,7 @@ const Navbar = () => {
     const navLink = <>
         <li><NavLink  to='/'>Home</NavLink></li>
         <li><NavLink to='/allClasses'>All Classes</NavLink></li>
-        <li><NavLink to='/teach-on-Byteskill'>Teach on Byteskill</NavLink></li>
+        <li><NavLink to='/teachnByteskill'>Teach on Byteskill</NavLink></li>
     </>
     const { user, logOut } = useAuth();
 
@@ -37,7 +37,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className="bg-[#1C1E2A] fixed w-full top-0 z-10">
+        <div className="bg-[#1C1E2A] fixed w-full top-0 z-10 ">
             <Container>
                 <div className="navbar text-white py-4 ">
                     <div className="navbar-start">

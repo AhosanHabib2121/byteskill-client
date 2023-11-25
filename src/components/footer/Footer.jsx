@@ -94,8 +94,8 @@ const Footer = () => {
             {/* copyright section here  */}
             <div className="bg-[#1C1E2A] text-white">
                 <Container>
-                    <div className="flex flex-col-reverse text-center gap-4 lg:flex-row lg:text-start lg:justify-between  py-9">
-                        <div>
+                    <div className="flex flex-col-reverse items-center gap-4 lg:flex-row lg:text-start lg:justify-between text-center  py-9">
+                        <div className="grid justify-center lg:justify-start">
                             <div className="flex gap-4">
                                 <a href="#" className="bg-[#504f4f] p-2 rounded-full hover:bg-[#8d55c5ec] ">
                                     <GrFacebookOption className="text-2xl " />
@@ -111,7 +111,7 @@ const Footer = () => {
                                 </a>
                             </div>
                         </div>
-                        <span className=" text-[#94A3B8]">
+                        <span className=" text-[#94A3B8] ">
                             Copyright © 2020. All rights reserved by, ByteSkill
                         </span>
                     </div>

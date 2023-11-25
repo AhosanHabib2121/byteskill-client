@@ -14,7 +14,8 @@ const Home = () => {
                 <PartnerSection />
                 
                 {/* teachers join section here */}
-                <TeachersJoin/>
+                <TeachersJoin />
+                
             </Container>
         </div>
     );  
