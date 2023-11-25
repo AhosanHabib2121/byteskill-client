@@ -11,6 +11,7 @@ const Navbar = () => {
     const navLink = <>
         <li><NavLink  to='/'>Home</NavLink></li>
         <li><NavLink to='/allClasses'>All Classes</NavLink></li>
+        <li><NavLink to='/teach-on-Byteskill'>Teach on Byteskill</NavLink></li>
     </>
     const { user, logOut } = useAuth();
 

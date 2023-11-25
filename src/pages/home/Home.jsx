@@ -1,5 +1,7 @@
 import Banner from "../../components/banner/Banner";
+import PartnerSection from "../../components/partnerSection/PartnerSection";
 import Container from "../../components/share/Container";
+import TeachersJoin from "../../components/teachersJoin/TeachersJoin";
 
 const Home = () => {
     return (
@@ -7,7 +9,12 @@ const Home = () => {
             <Container>
                 {/* banner part here */}
                 <Banner />
-                <h2>This is home page</h2>
+
+                {/* Partner section here */}
+                <PartnerSection />
+                
+                {/* teachers join section here */}
+                <TeachersJoin/>
             </Container>
         </div>
     );  

@@ -47,7 +47,6 @@ const SignUp = () => {
                         }
                         axiosSecure.post('/api/user', userData)
                             .then(res => {
-                                console.log(res.data)
                                 if (res?.data?.insertedId) {
                                     const Toast = Swal.mixin({
                                         toast: true,
