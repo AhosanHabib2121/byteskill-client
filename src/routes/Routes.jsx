@@ -30,7 +30,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'teachnByteskill',
-                element: <PrivateRoutes><TeacherToByteskill /></PrivateRoutes>
+                element: <PrivateRoutes><TeacherToByteskill/></PrivateRoutes>
             },
             {
                 path: 'signIn',

@@ -1,10 +1,17 @@
+import AOS from 'aos';
+import { useEffect } from 'react';
 
-const BannerTitle = ({title, subTitle}) => {
+const BannerTitle = ({ title, subTitle }) => {
+    useEffect(() => {
+        AOS.init({
+            duration: 2000,
+        });
+    }, [])
     return (
         <div>
             <div className='relative '>
                 <div className="hero h-[350px] overflow-hidden">
-                    <div className="hero-content">
+                    <div className="hero-content" data-aos="fade-down">
                         <div className='-mt-10'>
                             <h1 className="text-5xl md:text-6xl text-center font-bold mb-4">{title} </h1>
                             <p className="text-center text-lg max-w-lg">{subTitle}</p>

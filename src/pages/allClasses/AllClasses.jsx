@@ -33,7 +33,7 @@ const AllClasses = () => {
                 <div className=" mt-8">
                     <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {
-                            allCalss.map(data => <div key={data?._id} className="card card-compact bg-slate-700 shadow-xl">
+                            allCalss.map(data => <div key={data?._id} className="card card-compact bg-slate-700 shadow-xl" data-aos="fade-up">
                                 <figure><img src={data?.image} className=" w-full h-60 object-cover" alt="not found" /></figure>
                                 <div className="card-body">
                                     <h2 className="card-title">{data?.title}</h2>

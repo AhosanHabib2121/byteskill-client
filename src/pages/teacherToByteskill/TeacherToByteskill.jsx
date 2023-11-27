@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import BannerTitle from "../../components/share/BannerTitle";
 
 const TeacherToByteskill = () => {
     const { register, handleSubmit, reset } = useForm();
@@ -37,6 +38,13 @@ const TeacherToByteskill = () => {
     return (
         <div className=" pt-20">
             <Container>
+                {/* bannerTitle section here */}
+                <BannerTitle
+                    title={'Add the teacher information'}
+                    subTitle={''}
+                />
+
+                {/* main content here */}
                 <div className=" mt-16 max-w-2xl mx-auto bg-[#e5e5e5] p-10 rounded">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         {/* name and Title here */}

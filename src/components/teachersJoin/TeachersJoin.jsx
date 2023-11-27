@@ -3,6 +3,7 @@ import teacherPhoto from '../../assets/teacher.jpg'
 import Button from '../button/Button';
 
 const TeachersJoin = () => {
+    
     return (
         <div className=" mt-14">
             {/* Section title here */}
@@ -12,7 +13,7 @@ const TeachersJoin = () => {
             </div>
 
             {/* main content here */}
-            <div className="hero h-[560px] lg:h-[400px] ">
+            <div className="hero h-[560px] lg:h-[400px] " data-aos="fade-up">
                 <div className="hero-content flex-col lg:flex-row gap-8">
                     <img src={teacherPhoto} className="max-w-xs md:max-w-md rounded-lg " />
                     <div className=''>

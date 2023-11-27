@@ -3,12 +3,14 @@ import app from "../firebase/firebase.config";
 import { createContext, useEffect, useState } from "react";
 const provider = new GoogleAuthProvider();
 import PropTypes from 'prop-types';
+import useAxiosSecure from "../hooks/useAxiosSecure";
 const auth = getAuth(app)
 export const AuthContext = createContext(null)
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
+    const axiosSecure = useAxiosSecure();
 
     // create user account
     const createUser = (email, password) => {
@@ -45,8 +47,19 @@ const AuthProvider = ({children}) => {
     // onAuthStateChange
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            const userEmail = currentUser?.email || user?.email;
+            const loggedUser = { email: userEmail };
             setUser(currentUser)
             setLoading(false)
+            if (currentUser) {
+                axiosSecure.post('/jwt', loggedUser)
+                    .then(() => {
+                        
+                     });
+            } else {
+                axiosSecure.post('/logout', loggedUser)
+                    .then(() => {});
+            }
         })
         return () => {
             return unsubscribe()
