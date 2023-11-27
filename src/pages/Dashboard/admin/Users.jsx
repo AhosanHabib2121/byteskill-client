@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaUsers } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import loader from '../../../assets/loader.gif'
 
 const Users = () => {
     const axiosSecure = useAxiosSecure();
@@ -33,7 +34,9 @@ const Users = () => {
 
     // loading here
     if (isPending) {
-        return <p className="text-red-600">loading....</p>
+        return <div className=" grid justify-center items-center h-screen">
+            <img src={loader} alt="not found" />
+        </div>
     }
     return (
         <div className="overflow-x-auto h-screen rounded-lg">

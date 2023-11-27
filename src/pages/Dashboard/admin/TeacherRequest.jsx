@@ -1,17 +1,40 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import loader from '../../../assets/loader.gif'
+import Swal from "sweetalert2";
 
 const TeacherRequest = () => {
     const axiosSecure = useAxiosSecure();
-    const { data:teacherRequest , isPending} = useQuery({
+    const { data:teacherRequest , isPending, refetch} = useQuery({
         queryKey: ['teacher-request'],
         queryFn: async () => {
             const res = await axiosSecure.get('/api/teacher/request');
             return res?.data;
         }
     })
+
+    // handleApproved here
+    const handleApproved = id => {
+        axiosSecure.patch(`/api/teacher/request/${id}`)
+            .then(res => {
+                if(res?.data?.modifiedCount){
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: 'Teacher request Accepted',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    refetch();
+                }
+            })
+    }
+
+
     if (isPending) {
-        return <p className="text-red-600">loading....</p>
+        return <div className=" grid justify-center items-center h-screen">
+            <img src={loader} alt="not found" />
+        </div>
     }
 
     return (
@@ -44,14 +67,25 @@ const TeacherRequest = () => {
                                 <td>{data?.category}</td>
                                 <td>{data?.status}</td>
                                 <td>
-                                    <div className="join gap-2">
-                                        <button className="btn hover:bg-green-800 bg-green-700 text-white btn-md normal-case">
-                                            Approved
-                                        </button>
-                                        <button className="btn hover:bg-red-800 bg-red-700 text-white btn-md normal-case">
-                                            Reject
-                                        </button>
-                                    </div>
+                                    {
+                                        (data?.status == 'accepted' || data?.status == 'rejected') ? <div className="join gap-2 " >
+                                            <button onClick={() => handleApproved(data?._id)} className="btn hover:bg-green-800 bg-green-700 text-white btn-md normal-case " disabled>
+                                                Approved
+                                            </button>
+                                            <button className="btn hover:bg-red-800 bg-red-700 text-white btn-md normal-case" disabled>
+                                                Reject
+                                            </button>
+                                        </div>
+                                            : <div className="join gap-2">
+                                                <button onClick={() => handleApproved(data?._id)} className="btn hover:bg-green-800 bg-green-700 text-white btn-md normal-case">
+                                                    Approved
+                                                </button>
+                                                <button className="btn hover:bg-red-800 bg-red-700 text-white btn-md normal-case">
+                                                    Reject
+                                                </button>
+                                            </div>
+                                    }
+                                   
                                 </td>
                             </tr>)
                         }
