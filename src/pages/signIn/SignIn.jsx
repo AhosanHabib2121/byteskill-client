@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BiSolidHide, BiSolidShow } from "react-icons/bi";
 import { useState } from "react";
 import Container from "../../components/share/Container";
@@ -11,9 +11,12 @@ import Swal from "sweetalert2";
 const SignIn = () => {
     const { signIn } = useAuth();
     const [passShowHide, setPassShowHide] = useState(false);
-    const navigate = useNavigate();
     const [error, setError] = useState('');
     const axiosPublic = useAxiosPublic();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.state?.from.pathname || '/';
+
 
     const handleSignIn = e => {
         e.preventDefault();
@@ -55,7 +58,7 @@ const SignIn = () => {
                                 title: "SignIn successfully",
                             });
                             form.reset();
-                            navigate("/");
+                            navigate(from, {replace:true});
                         }
                     })
             })

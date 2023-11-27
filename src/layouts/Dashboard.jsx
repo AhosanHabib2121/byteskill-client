@@ -4,9 +4,14 @@ import { NavLink, Outlet } from "react-router-dom";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 import { LuGalleryVerticalEnd } from "react-icons/lu";
 import { CgProfile } from "react-icons/cg";
+import { RiDashboard3Fill } from "react-icons/ri";
+import useAdmin from "../hooks/useAdmin";
 
 
 const Dashboard = () => {
+
+    const [isAdmin] = useAdmin();
+    
     return (
         <div className="">
             {/* side menubar */}
@@ -29,16 +34,32 @@ const Dashboard = () => {
                     <ul className="p-6 text-lg font-semibold w-60 min-h-full bg-[#1C1E2A] text-white space-y-4">
                         {/* Sidebar content here */}
 
-                        {/* admin routes here */}
-                        <li><NavLink to='/dashboard' className='flex items-center gap-3'><FaHome className=" text-2xl" />Dashboard</NavLink></li>
+                        {isAdmin ? <>
+                            <li><NavLink to='/dashboard/admin' className='flex items-center gap-3'><RiDashboard3Fill className=" text-2xl" />Admin Dashboard</NavLink></li>
 
-                        <li><NavLink to='/dashboard/teacherRequest' className='flex items-center gap-3'><VscGitPullRequestGoToChanges className=" text-2xl" /> Teacher Request</NavLink></li>
+                            <li><NavLink to='/dashboard/teacherRequest' className='flex items-center gap-3'><VscGitPullRequestGoToChanges className=" text-2xl" /> Teacher Request</NavLink></li>
 
-                        <li><NavLink to='/dashboard/allclasses' className='flex items-center gap-3'><LuGalleryVerticalEnd className=" text-2xl" /> All clesses</NavLink></li>
+                            <li><NavLink to='/dashboard/allclasses' className='flex items-center gap-3'><LuGalleryVerticalEnd className=" text-2xl" /> All clesses</NavLink></li>
+
+                            <li><NavLink to='/dashboard/users' className='flex items-center gap-3'><FaUsers className=" text-2xl" /> Users</NavLink></li>
+
+                            <li><NavLink to='/dashboard/profile' className='flex items-center gap-3'><CgProfile className=" text-2xl" /> Profile</NavLink></li>
+                            <hr />
+                            <li><NavLink to='/' className='flex items-center gap-3'><FaHome className=" text-2xl" /> Home</NavLink></li>
+                            </>
+                            : <>
+                            
+                                <li><NavLink to='/dashboard/admin' className='flex items-center gap-3'><RiDashboard3Fill className=" text-2xl" />user</NavLink></li>
+
+
+                                <li><NavLink to='/dashboard/profile' className='flex items-center gap-3'><CgProfile className=" text-2xl" /> Profile</NavLink></li>
+                                <hr />
+                                <li><NavLink to='/' className='flex items-center gap-3'><FaHome className=" text-2xl" /> Home</NavLink></li>
+                            </>
+                        }
                         
-                        <li><NavLink to='/dashboard/users' className='flex items-center gap-3'><FaUsers className=" text-2xl" /> Users</NavLink></li>
                         
-                        <li><NavLink to='/dashboard/profile' className='flex items-center gap-3'><CgProfile className=" text-2xl"/> Profile</NavLink></li>
+                        
                     </ul>
 
                 </div>

@@ -11,6 +11,7 @@ import AdminDashboard from "../pages/Dashboard/admin/AdminDashboard";
 import TeacherRequest from "../pages/Dashboard/admin/TeacherRequest";
 import Allclasses from "../pages/Dashboard/admin/Allclasses";
 import Profile from "../pages/Dashboard/admin/Profile";
+import PrivateRoutes from "./privateRoutes/PrivateRoutes";
 
 const router = createBrowserRouter([
     {
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'teachnByteskill',
-                element:<TeacherToByteskill/>
+                element: <PrivateRoutes><TeacherToByteskill /></PrivateRoutes>
             },
             {
                 path: 'signIn',
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
         children: [
             // admin routes here
             {
-                path: '/dashboard',
+                path:'admin',
                 element: <AdminDashboard/>
             },
             {

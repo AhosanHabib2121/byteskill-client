@@ -77,7 +77,7 @@ const Navbar = () => {
                                                 {user?.displayName}
                                             </p>
                                         </li>
-                                        <li><Link to='/dashboard'>Dashboard</Link></li>
+                                        <li><Link to='/dashboard/admin'>Dashboard</Link></li>
                                         <Button
                                             onClick={handleLogout}
                                             label={'Logout'}

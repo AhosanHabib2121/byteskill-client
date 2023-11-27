@@ -1,8 +1,75 @@
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { FaUsers } from "react-icons/fa6";
+import Swal from "sweetalert2";
 
 const Users = () => {
+    const axiosSecure = useAxiosSecure();
+    
+    // get user data
+    const { data:users, isPending, refetch } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/api/user');
+            return res?.data;
+        }
+    })
+    // make admin
+    const handleMakeAdmin = user => {
+        axiosSecure.patch(`/api/user/admin/${user._id}`)
+            .then(res => {
+                refetch();
+                if (res.data.matchedCount == 1) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${user.name} is an admin now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+    }
+
+    // loading here
+    if (isPending) {
+        return <p className="text-red-600">loading....</p>
+    }
     return (
-        <div>
-            <h2 className=" text-black">this users page </h2>
+        <div className="overflow-x-auto h-screen rounded-lg">
+            <table className="table table-zebra ">
+                {/* head */}
+                <thead className=" bg-[#9050cc] text-white text-lg">
+                    <tr>
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Make Admin</th>
+                        <th>Images</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        users?.map((user, inx) => <tr key={user._id}>
+                            <th>{inx + 1}</th>
+                            <td>{user?.name}</td>
+                            <td>{user?.email}</td>
+                            <td>
+                                {
+                                    user.role == 'admin' ? 'admin' : <button onClick={() => handleMakeAdmin(user)} className="btn hover:bg-[#7433b1] bg-[#9050cc] btn-md normal-case">
+                                        <FaUsers className=" text-xl text-white" />
+                                    </button>
+                                }
+                            </td>
+                            <td>
+                                <img src={user?.image} className="w-20 rounded-full" alt="not found" />
+                            </td>
+                        </tr>)
+                    }
+
+
+                </tbody>
+            </table>
         </div>
     );
 };

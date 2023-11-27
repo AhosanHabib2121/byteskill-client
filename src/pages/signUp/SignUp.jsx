@@ -35,7 +35,6 @@ const SignUp = () => {
 
         // image upload in imgbb host server start
         const imageData = await useImageUpload(image);
-        // console.log(imageData)
         // firebased create user
         createUser(email, password)
             .then(data => {
@@ -43,7 +42,8 @@ const SignUp = () => {
                     .then(() => {
                         const userData = {
                             name: data?.user?.displayName,
-                            email: data?.user?.email
+                            email: data?.user?.email,
+                            image: imageData?.data?.display_url
                         }
                         axiosSecure.post('/api/user', userData)
                             .then(res => {
