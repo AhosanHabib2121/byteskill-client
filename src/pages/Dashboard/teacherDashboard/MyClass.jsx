@@ -1,8 +1,11 @@
+import Container from "../../../components/share/Container";
 
 const MyClass = () => {
     return (
         <div>
-            <h2>my class here</h2>
+            <Container>
+                <h2>my class here</h2>
+            </Container>
         </div>
     );
 };

@@ -10,6 +10,7 @@ const Banner = () => {
     useEffect(() => {
         AOS.init({
             duration: 2000,
+            delay: 300, 
         });
     }, [])
     return (

@@ -1,8 +1,11 @@
+import Container from "../../../components/share/Container";
 
 const Allclasses = () => {
     return (
         <div>
-            <h2>all classes page</h2>            
+            <Container>
+                <h2>all classes page</h2> 
+            </Container>           
         </div>
     );
 };

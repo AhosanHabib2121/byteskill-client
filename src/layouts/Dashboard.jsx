@@ -12,7 +12,7 @@ import { MdAddToQueue } from "react-icons/md";
 import useAuth from "../hooks/useAuth";
 
 const Dashboard = () => {
-    const {loading } = useAuth();
+    const { loading } = useAuth();
         
     const [isAdmin, isAdminLoading] = useAdmin();
     const [isTeacherAdmin, isTeacherLoading] = useTeacherAdmin();
@@ -30,9 +30,9 @@ const Dashboard = () => {
             {/* side menubar */}
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col pt-8 mx-8">
+                <div className="drawer-content flex flex-col pt-8 lg:mx-8">
                     {/* Page content here */}
-                    <div className=" grid justify-end">
+                    <div className=" grid justify-end mr-4 mb-4">
                         <label htmlFor="my-drawer-2" className="btn bg-[#9050cc] text-white drawer-button lg:hidden"><FaBars/></label>
                     </div>
 
