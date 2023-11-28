@@ -31,6 +31,23 @@ const TeacherRequest = () => {
             })
     }
 
+    // handleReject here
+    const handleReject = id => {
+        axiosSecure.patch(`/api/teacher/request/reject/${id}`)
+            .then(res => {
+                if (res?.data?.modifiedCount) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: 'Teacher request reject',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    refetch();
+                }
+            })
+    }
+
 
     if (isPending) {
         return <div className=" grid justify-center items-center h-screen">
@@ -71,7 +88,7 @@ const TeacherRequest = () => {
                                     <td>
                                         {
                                             (data?.status == 'accepted' || data?.status == 'rejected') ? <div className="join gap-2 " >
-                                                <button onClick={() => handleApproved(data?._id)} className="btn hover:bg-green-800 bg-green-700 text-white btn-md normal-case " disabled>
+                                                <button className="btn hover:bg-green-800 bg-green-700 text-white btn-md normal-case " disabled>
                                                     Approved
                                                 </button>
                                                 <button className="btn hover:bg-red-800 bg-red-700 text-white btn-md normal-case" disabled>
@@ -82,7 +99,8 @@ const TeacherRequest = () => {
                                                     <button onClick={() => handleApproved(data?._id)} className="btn hover:bg-green-800 bg-green-700 text-white btn-md normal-case">
                                                         Approved
                                                     </button>
-                                                    <button className="btn hover:bg-red-800 bg-red-700 text-white btn-md normal-case">
+
+                                                    <button onClick={() => handleReject(data?._id)} className="btn hover:bg-red-800 bg-red-700 text-white btn-md normal-case">
                                                         Reject
                                                     </button>
                                                 </div>

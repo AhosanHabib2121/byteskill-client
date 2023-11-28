@@ -7,9 +7,9 @@ import Swal from "sweetalert2";
 
 const Profile = () => {
     const axiosSecure = useAxiosSecure();
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
 
-    const { data: profile, isLoading } = useQuery({
+    const { data: profile, isLoading, refetch } = useQuery({
 
         queryKey: ['profileData',],
         queryFn: async () => {
@@ -19,7 +19,7 @@ const Profile = () => {
     })
 
     // phone number insert in to the database
-    const handlePhoneNumber = e => {
+    const handlePhoneNumber = (e) => {
         e.preventDefault();
         const form = e.target;
         const number = form.number.value;
@@ -28,6 +28,7 @@ const Profile = () => {
         }
         axiosSecure.put(`/api/user/${user?.email}`, numberData)
             .then(res => {
+                refetch();
                 if (res?.data?.modifiedCount == 1 || res?.data?.matchedCount ==1) {
                     const Toast = Swal.mixin({
                         toast: true,
@@ -50,12 +51,12 @@ const Profile = () => {
                         icon: "success",
                         title: "Number added successfully",
                     });
+                    
                 }
             })
 
     }
-
-    if (isLoading) {
+    if (isLoading || loading) {
         return <div className=" grid justify-center items-center h-screen">
             <img src={loader} alt="not found" />
         </div>
@@ -71,6 +72,9 @@ const Profile = () => {
                             <h2 className=" text-xl font-semibold">Name : {profile?.name}</h2>
                             <h2 className=" text-xl font-semibold">Email : {profile?.email}</h2>
                             <h2 className=" text-xl font-semibold">Role : {profile?.role ? `${profile?.role}` : 'student'}</h2>
+
+                            <h2 className=" text-xl font-semibold">Phone number : {profile?.number ? `${profile?.number}` : 'N/A'}</h2>
+                            
                             <div className=" flex flex-col md:flex-row md:items-center gap-2 mt-2">
                                 <h2 className=" text-xl font-semibold">Phone :</h2>
                                 <form onSubmit={handlePhoneNumber} className="flex-1 flex gap-3">
@@ -78,8 +82,7 @@ const Profile = () => {
                                         <input
                                             type="number"
                                             name="number"
-                                            defaultValue={profile?.number}
-                                            placeholder="N/A, please give a number!"
+                                            placeholder="please give a number!"
                                             className="input input-bordered text-black w-full"
                                             required
                                         />

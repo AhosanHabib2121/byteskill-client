@@ -5,6 +5,7 @@ const provider = new GoogleAuthProvider();
 import PropTypes from 'prop-types';
 import useAxiosSecure from "../hooks/useAxiosSecure";
 const auth = getAuth(app)
+
 export const AuthContext = createContext(null)
 
 const AuthProvider = ({children}) => {
