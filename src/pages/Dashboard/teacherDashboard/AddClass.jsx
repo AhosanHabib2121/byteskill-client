@@ -22,6 +22,7 @@ const AddClass = () => {
             price: data?.price,
             image: imageUpload?.data?.display_url,
             description: data?.description,
+            status: 'pending'
         }
         // add class data save to database
         const requestRes = await axiosSecure.post('/addClass', addClassData);

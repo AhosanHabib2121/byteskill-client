@@ -19,7 +19,7 @@ const AllClasses = () => {
     const { data: allCalss, isLoading } = useQuery({
         queryKey: ['allCalss'],
         queryFn: async () => {
-            const res = await axiosPublic.get('/addClass');
+            const res = await axiosPublic.get('/addClass/approved');
             return res.data;
         }
 
