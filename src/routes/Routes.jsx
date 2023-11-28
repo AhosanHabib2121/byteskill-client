@@ -16,11 +16,13 @@ import AddClass from "../pages/Dashboard/teacherDashboard/AddClass";
 import MyClass from "../pages/Dashboard/teacherDashboard/MyClass";
 import AdminRutes from "./adminRoutes/AdminRutes";
 import TeacherRoutes from "./teacherRoutes/TeacherRoutes";
+import ErrorPage from "../pages/errorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Root />,
+        errorElement:<ErrorPage/>,
         children: [
             {
                 index: true,
@@ -46,7 +48,8 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <PrivateRoutes><Dashboard/></PrivateRoutes>,
+        element: <PrivateRoutes><Dashboard /></PrivateRoutes>,
+        errorElement:<ErrorPage/>,
         children: [
             // admin routes here
             {

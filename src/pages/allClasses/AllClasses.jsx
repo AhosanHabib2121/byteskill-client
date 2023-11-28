@@ -4,8 +4,17 @@ import BannerTitle from "../../components/share/BannerTitle";
 import Container from "../../components/share/Container";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import loader from '../../assets/loader.gif';
+import { useEffect } from "react";
+import Aos from "aos";
 
 const AllClasses = () => {
+    useEffect(() => {
+        Aos.init({
+            duration: 2000,
+            delay: 300,
+        });
+    }, [])
+    
     const axiosPublic = useAxiosPublic();
     const { data: allCalss, isLoading } = useQuery({
         queryKey: ['allCalss'],
@@ -33,7 +42,7 @@ const AllClasses = () => {
                 <div className=" mt-8">
                     <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {
-                            allCalss.map((data, inx) => <div key={data?._id} className="card card-compact bg-slate-700 shadow-xl" data-aos="fade-up" data-aos-delay={(inx + 1) * 200}>
+                            allCalss?.map((data, inx) => <div key={data?._id} className="card card-compact bg-slate-700 shadow-xl" data-aos="fade-up" data-aos-delay={(inx + 1) * 300}>
                                 <figure><img src={data?.image} className=" w-full h-60 object-cover" alt="not found" /></figure>
                                 <div className="card-body">
                                     <h2 className="card-title">{data?.title}</h2>

@@ -7,11 +7,10 @@ import AOS from 'aos';
 
 
 const Banner = () => {
-    useEffect(() => {
-        AOS.init({
-            duration: 2000,
-            delay: 300, 
-        });
+        useEffect(() => {
+            AOS.init({
+                duration: 2000,
+            });
     }, [])
     return (
         <div className='relative '>
