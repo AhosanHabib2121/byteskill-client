@@ -6,7 +6,7 @@ import Container from "../../../components/share/Container";
 
 const TeacherRequest = () => {
     const axiosSecure = useAxiosSecure();
-    const { data:teacherRequest , isPending, refetch} = useQuery({
+    const { data:teacherRequest , isLoading, refetch} = useQuery({
         queryKey: ['teacher-request'],
         queryFn: async () => {
             const res = await axiosSecure.get('/api/teacher/request');
@@ -49,7 +49,7 @@ const TeacherRequest = () => {
     }
 
 
-    if (isPending) {
+    if (isLoading) {
         return <div className=" grid justify-center items-center h-screen">
             <img src={loader} alt="not found" />
         </div>

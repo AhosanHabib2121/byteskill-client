@@ -1,4 +1,5 @@
 import Banner from "../../components/banner/Banner";
+import ElementorSection from "../../components/elementor-section/ElementorSection";
 import PartnerSection from "../../components/partnerSection/PartnerSection";
 import Container from "../../components/share/Container";
 import TeachersJoin from "../../components/teachersJoin/TeachersJoin";
@@ -15,8 +16,10 @@ const Home = () => {
                 
                 {/* teachers join section here */}
                 <TeachersJoin />
-                
+
             </Container>
+            {/* elementor section  here */}
+            <ElementorSection/>
         </div>
     );  
 };

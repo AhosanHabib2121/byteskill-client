@@ -9,13 +9,14 @@ const Users = () => {
     const axiosSecure = useAxiosSecure();
     
     // get user data
-    const { data:users, isPending, refetch } = useQuery({
+    const { data:users, isLoading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/api/user');
             return res?.data;
         }
     })
+
     // make admin
     const handleMakeAdmin = user => {
         axiosSecure.patch(`/api/user/admin/${user._id}`)
@@ -34,7 +35,7 @@ const Users = () => {
     }
 
     // loading here
-    if (isPending) {
+    if (isLoading) {
         return <div className=" grid justify-center items-center h-screen">
             <img src={loader} alt="not found" />
         </div>
