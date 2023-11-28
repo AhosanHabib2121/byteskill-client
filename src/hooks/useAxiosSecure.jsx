@@ -1,5 +1,6 @@
 import axios from "axios";
 import useAuth from "./useAuth";
+import { useNavigate } from "react-router-dom";
 
 const axiosSecure = axios.create({
     baseURL: 'http://localhost:5000',
@@ -7,17 +8,20 @@ const axiosSecure = axios.create({
 })
 
 const useAxiosSecure = () => {
-    // const { logOut } = useAuth();
+    const { logOut } = useAuth();
+    const navigate = useNavigate();
 
-    // console.log(user)
-    
     axiosSecure.interceptors.response.use(res => {
         return res
     }, error => {
         console.log(error);
         if (error.response.status == 401 || error.response.status == 403) {
-            console.log('error rediret login page');
-        }
+            logOut()
+             .then(() => {
+                 navigate("/signIn");
+             })
+            .catch((error) => console.log(error));
+            }
     })
     
     return axiosSecure;

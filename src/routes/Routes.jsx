@@ -14,6 +14,8 @@ import Profile from "../pages/Dashboard/admin/Profile";
 import PrivateRoutes from "./privateRoutes/PrivateRoutes";
 import AddClass from "../pages/Dashboard/teacherDashboard/AddClass";
 import MyClass from "../pages/Dashboard/teacherDashboard/MyClass";
+import AdminRutes from "./adminRoutes/AdminRutes";
+import TeacherRoutes from "./teacherRoutes/TeacherRoutes";
 
 const router = createBrowserRouter([
     {
@@ -44,42 +46,42 @@ const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <Dashboard />,
+        element: <PrivateRoutes><Dashboard/></PrivateRoutes>,
         children: [
             // admin routes here
             {
                 path:'admin',
-                element: <AdminDashboard/>
+                element: <PrivateRoutes><AdminDashboard/></PrivateRoutes>
             },
             {
                 path: 'teacherRequest',
-                element: <TeacherRequest/>
+                element: <AdminRutes><TeacherRequest/></AdminRutes>
             },
             {
                 path: 'allclasses',
-                element: <Allclasses/>
+                element: <AdminRutes><Allclasses/></AdminRutes>
             },
             {
                 path: 'users',
-                element:<Users/>
+                element: <AdminRutes><Users/></AdminRutes>
             },
             {
                 path: 'profile',
-                element:<Profile/>
+                element: <PrivateRoutes><Profile/></PrivateRoutes>
             },
             // teacher admin
             {
                 path: 'addClass',
-                element:<AddClass/>
+                element: <TeacherRoutes><AddClass/></TeacherRoutes>
             },
             {
                 path: 'myClass',
-                element:<MyClass/>
+                element: <TeacherRoutes><MyClass/></TeacherRoutes>
             },
             // student admin
             {
                 path: 'myEnrollClass',
-                element:<MyClass/>
+                element: <PrivateRoutes><MyClass/></PrivateRoutes>
             },
         ]
     }
