@@ -17,6 +17,8 @@ import MyClass from "../pages/Dashboard/teacherDashboard/MyClass";
 import AdminRutes from "./adminRoutes/AdminRutes";
 import TeacherRoutes from "./teacherRoutes/TeacherRoutes";
 import ErrorPage from "../pages/errorPage/ErrorPage";
+import ClassesDetails from "../pages/allClasses/ClassesDetails";
+import Payment from "../pages/allClasses/payment/Payment";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
             {
                 path: 'allClasses',
                 element:<AllClasses/>
+            },
+            {
+                path: 'classesDetails/:id',
+                element:<ClassesDetails/>
+            },
+            {
+                path: 'payment/:id',
+                element:<Payment/>
             },
             {
                 path: 'teachnByteskill',

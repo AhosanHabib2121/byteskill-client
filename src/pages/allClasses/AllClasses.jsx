@@ -5,11 +5,12 @@ import Container from "../../components/share/Container";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import loader from '../../assets/loader.gif';
 import { useEffect } from "react";
-import Aos from "aos";
+import AOS from 'aos';
+import { Link } from "react-router-dom";
 
 const AllClasses = () => {
     useEffect(() => {
-        Aos.init({
+        AOS.init({
             duration: 2000,
             delay: 300,
         });
@@ -24,6 +25,7 @@ const AllClasses = () => {
         }
 
     });
+
 
     if (isLoading) {
         return <div className=" grid justify-center items-center h-screen">
@@ -49,9 +51,11 @@ const AllClasses = () => {
                                     <p>Name: {data?.name}</p>
                                     <p>Price: ${data?.price}</p>
                                     <div className="card-actions justify-end mt-3">
-                                        <Button
-                                            label={'Enroll'}
-                                        />
+                                        <Link to={`/classesDetails/${data?._id}`}>
+                                            <Button
+                                                label={'Enroll'}
+                                            />
+                                        </Link>
                                     </div>
                                 </div>
                             </div>)
