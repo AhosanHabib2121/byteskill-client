@@ -5,6 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import BannerTitle from "../../components/share/BannerTitle";
+import { Helmet } from "react-helmet-async";
 
 const TeacherToByteskill = () => {
     const { register, handleSubmit, reset } = useForm();
@@ -37,6 +38,11 @@ const TeacherToByteskill = () => {
 
     return (
         <div className=" pt-20">
+            {/* website naming title */}
+            <Helmet>
+                <title>ByteSkill | Teacher on ByteSkill</title>
+            </Helmet>
+            
             <Container>
                 {/* bannerTitle section here */}
                 <BannerTitle

@@ -11,6 +11,7 @@ const Payment = () => {
 
     return (
         <div className="pt-28">
+            
             <Container>
             {/* payment gateway in stripe */}
                 <Elements stripe={stripePromise}>

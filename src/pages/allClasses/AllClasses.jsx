@@ -7,6 +7,7 @@ import loader from '../../assets/loader.gif';
 import { useEffect } from "react";
 import AOS from 'aos';
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const AllClasses = () => {
     useEffect(() => {
@@ -35,6 +36,11 @@ const AllClasses = () => {
 
     return (
         <div className=" pt-28">
+            {/* website naming title */}
+            <Helmet>
+                <title>ByteSkill | AllClasses</title>
+            </Helmet>
+
             <Container>
                 {/* BannerTitle section here */}
                 <BannerTitle

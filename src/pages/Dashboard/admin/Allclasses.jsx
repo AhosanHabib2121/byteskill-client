@@ -38,6 +38,7 @@ const Allclasses = () => {
 
     return (
         <div>
+            
             <Container>
                 <div className="overflow-x-auto h-screen rounded-lg">
                     <table className="table table-zebra ">
