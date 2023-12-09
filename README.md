@@ -1,8 +1,12 @@
-# React + Vite
+Website live link : [https://byteskill-ce962.web.app/](https://byteskill-ce962.web.app/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project features:
+- First of all all packages for the website have been installed by tailwind css , daisyUI and router.
 
-Currently, two official plugins are available:
+- Normally there are six sections on the home page and one section is Feature teacher class info and one is new course started message. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- There will be a Teach on Byteskill menu click on the teacher request and seen request admin.
+
+- Important thing here is that only those who are logged in can use the bio details button and can use other features.
+
+- In the final work three dashboard panel created this dashboard panel name Admin, Teacher and Student.

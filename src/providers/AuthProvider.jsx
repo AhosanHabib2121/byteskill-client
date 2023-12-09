@@ -8,7 +8,7 @@ const auth = getAuth(app)
 
 export const AuthContext = createContext(null)
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
 
@@ -50,7 +50,7 @@ const AuthProvider = ({children}) => {
             const userEmail = currentUser?.email || user?.email;
             const loggedUser = { email: userEmail };
             setUser(currentUser)
-            
+
             if (currentUser) {
                 axios.post('https://byteskill-server-ass12.vercel.app/jwt',
                     loggedUser,
@@ -60,7 +60,7 @@ const AuthProvider = ({children}) => {
                 )
                     .then(() => {
                         setLoading(false)
-                     });
+                    });
             } else {
                 axios.post('https://byteskill-server-ass12.vercel.app/logout',
                     loggedUser,
