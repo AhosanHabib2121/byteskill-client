@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser)
 
             if (currentUser) {
-                axios.post('https://byteskill-server-ass12.vercel.app/jwt',
+                axios.post('http://localhost:5000/jwt',
                     loggedUser,
                     {
                         withCredentials: true,
@@ -62,7 +62,7 @@ const AuthProvider = ({ children }) => {
                         setLoading(false)
                     });
             } else {
-                axios.post('https://byteskill-server-ass12.vercel.app/logout',
+                axios.post('http://localhost:5000/logout',
                     loggedUser,
                     {
                         withCredentials: true,

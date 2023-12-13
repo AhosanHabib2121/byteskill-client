@@ -3,7 +3,7 @@ import useAuth from "./useAuth";
 import { useNavigate } from "react-router-dom";
 
 const axiosSecure = axios.create({
-    baseURL: 'https://byteskill-server-ass12.vercel.app',
+    baseURL: 'http://localhost:5000',
     withCredentials: true,
 })
 
@@ -17,13 +17,13 @@ const useAxiosSecure = () => {
         console.log(error);
         if (error.response.status == 401 || error.response.status == 403) {
             logOut()
-             .then(() => {
-                 navigate("/signIn");
-             })
-            .catch((error) => console.log(error));
-            }
+                .then(() => {
+                    navigate("/signIn");
+                })
+                .catch((error) => console.log(error));
+        }
     })
-    
+
     return axiosSecure;
 };
 
