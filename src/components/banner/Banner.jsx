@@ -20,7 +20,7 @@ const Banner = () => {
                         <img src={bannerPhoto1} className="max-w-sm md:max-w-xl -mb-4 mt-24  " />
 
                         <div className='absolute overflow-hidden top-40 md:top-60'>
-                            <img src={bannerPhoto2} className="animate-spin   delay-700 duration-700 md:w-[80px] w-[70px] mt-8" />
+                            <img src={bannerPhoto2} className="animate-spin delay-700 duration-700 md:w-[80px] w-[70px] mt-8" />
                             <img src={bannerPhoto3} className="animate-bounce delay-700 duration-700  md:w-[80px] w-[70px] ml-16 mt-8 " />
                         </div>
 

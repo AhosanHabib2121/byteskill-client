@@ -17,6 +17,7 @@ const TeacherToByteskill = () => {
             name: data?.name,
             title: data?.title,
             image: user?.photoURL,
+            email: user?.email,
             experience: data?.experience,
             category: data?.category,
             status:'pending'

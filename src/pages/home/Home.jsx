@@ -4,6 +4,7 @@ import ElementorSection from "../../components/elementor-section/ElementorSectio
 import PartnerSection from "../../components/partnerSection/PartnerSection";
 import Container from "../../components/share/Container";
 import TeachersJoin from "../../components/teachersJoin/TeachersJoin";
+import OurTeacher from "../../components/ourAllTeacher/OurTeacher";
 
 const Home = () => {
     return (
@@ -25,7 +26,12 @@ const Home = () => {
 
             </Container>
             {/* elementor section  here */}
-            <ElementorSection/>
+            <ElementorSection />
+
+            <Container>
+                {/* our all teacher section here */}
+                <OurTeacher/>
+            </Container>
         </div>
     );  
 };
